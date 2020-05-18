@@ -22,6 +22,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'graphql', '~> 1.10', '>= 1.10.9'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
@@ -31,6 +32,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'graphiql-rails', '~> 1.7'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
