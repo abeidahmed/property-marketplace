@@ -6,7 +6,7 @@ class Mutations::LoginUser < Mutations::BaseMutation
   field :token, String, null: true
 
   def resolve(email:, password:)
-    user = User.find_by(email: email)
+    user = User.find_by(email: email.downcase)
 
     return unless user
 
