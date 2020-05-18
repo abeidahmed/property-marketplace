@@ -10,16 +10,16 @@ class Mutations::LoginUser < Mutations::BaseMutation
 
     return unless user
 
-    found_user = user.authenticate(password)
+    authenticated_user = user.authenticate(password)
 
-    return unless found_user
+    return unless authenticated_user
 
     secret_key = Rails.application.secrets.secret_key_base
-    data_to_encode = { user_id: "#{found_user.id}" }
+    data_to_encode = { user_id: "#{authenticated_user.id}" }
     token = JWT.encode data_to_encode, secret_key, "HS256"
 
     {
-      user: found_user,
+      user: authenticated_user,
       token: token
     }
   end
