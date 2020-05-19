@@ -13,9 +13,9 @@ const Login = () => {
             Sign in to your account
           </h2>
           <p className="mt-2 text-center text-sm leading-5 text-gray-600">
-            Already have an account?{" "}
+            Don't have an account?{" "}
             <Link
-              to="/"
+              to="/signup"
               className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
             >
               Sign up
@@ -48,18 +48,7 @@ const Login = () => {
           </div>
 
           <div className="mt-6 flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember_me"
-                type="checkbox"
-                className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-              />
-              <label htmlFor="remember_me" className="ml-2 block text-sm leading-5 text-gray-900">
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm leading-5">
+            <div className="ml-auto text-sm leading-5">
               <Link
                 to="/"
                 className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
