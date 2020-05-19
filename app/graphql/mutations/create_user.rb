@@ -23,7 +23,7 @@ class Mutations::CreateUser < Mutations::BaseMutation
         user: nil,
         token: nil
       }
-      raise GraphQL::ExecutionError, user.errors.full_messages.join(", ")
+      raise GraphQL::ExecutionError, user.errors.full_messages
     end
   end
 end
