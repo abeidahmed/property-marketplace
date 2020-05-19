@@ -6,7 +6,6 @@ class Mutations::CreateUser < Mutations::BaseMutation
 
   field :user, Types::UserType, null: true
   field :token, String, null: true
-  field :errors, [String], null: false
 
   def resolve(email:, first_name:, last_name:, password:)
     user = User.new(email: email, first_name: first_name, last_name: last_name, password: password)
@@ -17,15 +16,14 @@ class Mutations::CreateUser < Mutations::BaseMutation
       token = JWT.encode data_to_encode, secret_key, "HS256"
       {
         user: user,
-        token: token,
-        errors: []
+        token: token
       }
     else
       {
         user: nil,
-        token: nil,
-        errors: user.errors.full_messages
+        token: nil
       }
+      raise GraphQL::ExecutionError, user.errors.full_messages.join(", ")
     end
   end
 end
