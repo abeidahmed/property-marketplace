@@ -4,13 +4,15 @@ import gql from "graphql-tag";
 import Header from "./components/header";
 import Image from "./components/building.jpg";
 import { useHistory } from "react-router-dom";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useApolloClient } from "@apollo/react-hooks";
 
 const Signup = () => {
+  const client = useApolloClient();
   const history = useHistory();
   const [signup, { loading }] = useMutation(REGISTER_USER, {
     onCompleted(signup) {
       localStorage.setItem("token", signup.createUser.token);
+      client.writeData({ data: { isLoggedIn: true } });
       history.push("/");
     }
   });

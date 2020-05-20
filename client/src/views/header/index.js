@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import DesktopLinks from "./components/desktop-links";
 import Icon from "components/icon";
+import { IS_LOGGED_IN } from "api/user/is-auth";
 import { Link, withRouter } from "react-router-dom";
 import LogoFull from "assets/logo/logo-full.svg";
 import LogoMark from "assets/logo/logo-mark.svg";
 import MobileLinks from "./components/mobile-links";
+import { useQuery } from "@apollo/react-hooks";
 
 const Header = ({ location }) => {
   const [mobileActive, setMobileActive] = useState(false);
+
+  const { data } = useQuery(IS_LOGGED_IN);
 
   const url = location.pathname;
   if (url.startsWith("/login") || url.startsWith("/signup")) {
@@ -23,7 +27,7 @@ const Header = ({ location }) => {
           </Link>
         </div>
         <div className="hidden lg:block">
-          <DesktopLinks />
+          <DesktopLinks data={data} />
         </div>
         <div className="-mr-2 flex items-center lg:hidden">
           <button

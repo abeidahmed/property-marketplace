@@ -25,9 +25,5 @@ export const profileLinks = [
   {
     title: "Settings",
     path: "/"
-  },
-  {
-    title: "Sign out",
-    path: "/"
   }
 ];
