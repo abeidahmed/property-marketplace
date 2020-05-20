@@ -1,13 +1,13 @@
 module Types
   class QueryType < Types::BaseObject
-    # /users
+    description "Get all the users"
     field :users, [Types::UserType], null: false
 
     def users
       User.all
     end
 
-    # /user/:id
+    description "Get a specific user with its id"
     field :user, Types::UserType, null: false do
       argument :id, ID, required: true
     end
@@ -16,6 +16,7 @@ module Types
       User.find(id)
     end
 
+    description "Get the current user if logged in"
     field :current_user, Types::UserType, null: true
 
     def current_user
