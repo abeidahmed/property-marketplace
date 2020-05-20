@@ -8,10 +8,7 @@ class GraphqlController < ApplicationController
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
-    context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
-    }
+    context = { current_user: current_user }
     result = PropertyMarketplaceSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
@@ -20,6 +17,16 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+  def current_user
+    header = request.headers["Authorization"]
+    return nil if header.empty?
+    token = header.sub!("Bearer ", "")
+    secret_key = Rails.application.secrets.secret_key_base
+    decoded_token = JWT.decode header, secret_key, true, { algorithm: 'HS256' }
+    id = decoded_token[0]["user_id"]
+    User.find_by(id: id)
+  end
 
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)
