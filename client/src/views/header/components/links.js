@@ -16,3 +16,18 @@ export const links = [
     path: "/"
   }
 ];
+
+export const profileLinks = [
+  {
+    title: "Profile",
+    path: "/"
+  },
+  {
+    title: "Settings",
+    path: "/"
+  },
+  {
+    title: "Sign out",
+    path: "/"
+  }
+];
