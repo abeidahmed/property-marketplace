@@ -9,7 +9,7 @@ export const fieldValidation = (errors, errorType) => {
     const errorArray = errorMessage.split(", ");
 
     for (let error of errorArray) {
-      if (error.startsWith(errorType)) {
+      if (error.toLowerCase().startsWith(errorType.toLowerCase())) {
         return error;
       }
     }
