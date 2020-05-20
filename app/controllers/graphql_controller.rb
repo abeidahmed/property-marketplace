@@ -20,7 +20,7 @@ class GraphqlController < ApplicationController
 
   def current_user
     header = request.headers["Authorization"]
-    return nil if header.empty?
+    return nil if header.nil?
     token = header.sub!("Bearer ", "")
     secret_key = Rails.application.secrets.secret_key_base
     decoded_token = JWT.decode header, secret_key, true, { algorithm: 'HS256' }
