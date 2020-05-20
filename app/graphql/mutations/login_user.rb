@@ -8,11 +8,11 @@ class Mutations::LoginUser < Mutations::BaseMutation
   def resolve(email:, password:)
     user = User.find_by(email: email.downcase)
 
-    return unless user
+    raise GraphQL::ExecutionError, "Invalid credentials" unless user
 
     authenticated_user = user.authenticate(password)
 
-    return unless authenticated_user
+    raise GraphQL::ExecutionError, "Invalid credentials" unless authenticated_user
 
     secret_key = Rails.application.secrets.secret_key_base
     data_to_encode = { user_id: "#{authenticated_user.id}" }
