@@ -1,13 +1,29 @@
 import React, { useState } from "react";
+import { fieldValidation } from "utils/field-validation";
 import Icon from "components/icon";
 import { Link } from "react-router-dom";
 
-const Form = () => {
+const Form = ({ login, loading }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      await login({
+        variables: {
+          email,
+          password
+        }
+      });
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   return (
-    <form className="mt-8">
+    <form className="mt-8" onSubmit={handleSubmit}>
       <div className="rounded-md shadow-sm">
         <div>
           <input
@@ -32,6 +48,9 @@ const Form = () => {
       </div>
 
       <div className="mt-6 flex items-center justify-between">
+        {fieldValidation(error, "Invalid") && (
+          <p className="text-sm font-medium text-red-700">{fieldValidation(error, "Invalid")}</p>
+        )}
         <div className="ml-auto text-sm leading-5">
           <Link
             to="/"
@@ -45,6 +64,7 @@ const Form = () => {
       <div className="mt-6">
         <button
           type="submit"
+          disabled={loading}
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
         >
           <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -53,7 +73,7 @@ const Form = () => {
               className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
             />
           </span>
-          Sign in
+          {loading ? "Signing in..." : "Sign in"}
         </button>
       </div>
     </form>
