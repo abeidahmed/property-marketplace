@@ -1,7 +1,6 @@
 import React from "react";
 import Form from "./components/form";
 import Header from "./components/header";
-import Icon from "components/icon";
 
 const Login = () => {
   return (
