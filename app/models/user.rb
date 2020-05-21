@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   def self.search(search) 
     self.where(
-      'lower(first_name) LIKE :search OR lower(last_name) LIKE :search OR lower(email) LIKE :search', 
+      "lower(first_name) LIKE :search OR lower(last_name) LIKE :search OR lower(email) LIKE :search", 
       search: "%#{search.downcase}%"
     )
   end
