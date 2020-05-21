@@ -7,7 +7,7 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/admin/dashboard" component={AdminRoute} />
+        <Route path="/admin" component={AdminRoute} />
         <Route path="/" component={PublicRoute} />
       </Switch>
     </Router>
