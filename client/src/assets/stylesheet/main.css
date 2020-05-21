@@ -856,6 +856,12 @@ video {
   animation: spin 1s linear infinite;
 }
 
+button:disabled,
+button[disabled] {
+  opacity: 0.8;
+  cursor: auto;
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));
