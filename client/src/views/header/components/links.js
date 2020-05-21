@@ -1,7 +1,7 @@
 export const links = [
   {
     title: "Dashboard",
-    path: "/"
+    path: "/admin/dashboard"
   },
   {
     title: "Product",
