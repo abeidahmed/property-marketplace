@@ -6,11 +6,7 @@ module Types
     end
 
     def users(search:)
-      if !search.blank?
-        User.search(search)
-      else
-        User.all
-      end
+      User.search(search)
     end
 
     description "Get a specific user with its id"
