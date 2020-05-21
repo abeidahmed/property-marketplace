@@ -1,7 +1,7 @@
 module Types
   class QueryType < Types::BaseObject
     description "Get all the users"
-    field :users, [Types::UserType], null: false do
+    field :users, Types::UserType.connection_type, null: false do
       argument :search, String, required: false
     end
 
