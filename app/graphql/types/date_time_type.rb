@@ -1,4 +1,4 @@
-class Types::DateTime < Types::BaseScalar
+class Types::DateTimeType < Types::BaseScalar
   def self.coerce_input(date_time, ctx)
     Time.zone.parse(date_time)
   end
