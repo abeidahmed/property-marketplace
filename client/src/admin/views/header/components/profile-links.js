@@ -1,12 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useOnOutsideClick } from "utils/on-outside-click";
 
 const ProfileLinks = ({ profileActive, setProfileActive }) => {
-  const ref = useRef();
-
-  useOnOutsideClick(ref, () => setProfileActive(false));
-
   const links = [
     {
       title: "Profile",
@@ -20,7 +15,6 @@ const ProfileLinks = ({ profileActive, setProfileActive }) => {
 
   return (
     <div
-      ref={ref}
       className={`${
         profileActive ? "block" : "hidden"
       } origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg`}
