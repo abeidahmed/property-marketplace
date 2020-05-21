@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { AvatarWithButton } from "components/avatar";
 import { Link, useHistory } from "react-router-dom";
 import { links, profileLinks } from "./links";
 import { useApolloClient } from "@apollo/react-hooks";
+import { useOnOutsideClick } from "utils/on-outside-click";
 
 const DesktopLinks = ({ data }) => {
   const [profileActive, setProfileActive] = useState(false);
+
+  const ref = useRef();
+
+  useOnOutsideClick(ref, () => setProfileActive(false));
 
   const history = useHistory();
   const client = useApolloClient();
@@ -27,22 +33,8 @@ const DesktopLinks = ({ data }) => {
       ))}
 
       {data.isLoggedIn ? (
-        <div className="relative">
-          <div>
-            <button
-              className="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-500 transition duration-150 ease-in-out"
-              id="user-menu"
-              aria-label="User menu"
-              aria-haspopup="true"
-              onClick={() => setProfileActive(!profileActive)}
-            >
-              <img
-                className="h-8 w-8 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
-            </button>
-          </div>
+        <div ref={ref} className="relative">
+          <AvatarWithButton toggleDropdown={setProfileActive} dropdownState={profileActive} />
 
           <div
             className={`${
