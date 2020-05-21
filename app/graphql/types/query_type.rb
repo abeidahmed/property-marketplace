@@ -1,10 +1,16 @@
 module Types
   class QueryType < Types::BaseObject
     description "Get all the users"
-    field :users, [Types::UserType], null: false
+    field :users, [Types::UserType], null: false do
+      argument :search, String, required: false
+    end
 
-    def users
-      User.all
+    def users(search:)
+      if !search.blank?
+        User.search(search)
+      else
+        User.all
+      end
     end
 
     description "Get a specific user with its id"
